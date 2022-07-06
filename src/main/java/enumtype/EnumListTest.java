@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnumListTest {
+
     public static void main(String[] args) {
         List<Role> roles = new ArrayList<>();
         roles.add(Role.ANIMATION);
