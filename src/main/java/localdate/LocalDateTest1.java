@@ -18,5 +18,10 @@ public class LocalDateTest1 {
         List<TempClass> tempClasses = Arrays.asList(tempClass2, tempClass);
         TempClass tempClass1 = tempClasses.stream().max(Comparator.comparing(TempClass::getLocalDateTime)).get();
         System.out.println(tempClass1.equals(tempClass2));
+
+        LocalDate today = LocalDate.now();
+        LocalDate localDate = today.withDayOfMonth(1).minusMonths(1);
+        System.out.println(today);
+        System.out.println(localDate);
     }
 }
