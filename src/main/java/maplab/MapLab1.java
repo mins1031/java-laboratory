@@ -1,5 +1,6 @@
 package maplab;
 
+import callby.Student;
 import programmers.MatrixPlus;
 
 import javax.sql.rowset.serial.SerialStruct;
@@ -51,5 +52,11 @@ public class MapLab1 {
         }
 
         new MapLab1().countDupliment();
+        int b = 7;
+        Student student = new Student();
+//        System.out.println(Math.min(student.getAge(), b));
+
+        int temp = 20000;
+        System.out.println(temp * 0.3);
     }
 }
