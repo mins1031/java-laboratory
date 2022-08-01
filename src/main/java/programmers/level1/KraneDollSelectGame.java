@@ -6,20 +6,19 @@ public class KraneDollSelectGame {
 
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
-        int size = board[0].length - 1;
+        int size = board[0].length;
         Stack<Integer> stack = new Stack();
 
         for (int move : moves) {
-            for (int i = size; i > -1; i--) {
+            for (int i = 0; i < size; i++) {
                 if (board[i][move-1] != 0) {
-                    int selectChar = board[i][move-1];
-                    if (!stack.empty() && stack.peek() == selectChar) {
+                    if (!stack.empty() && stack.peek() == board[i][move-1]) {
                         answer += 2;
                         stack.pop();
                     } else {
-                        stack.push(selectChar);
+                        stack.push(board[i][move-1]);
                     }
-                    selectChar = 0;
+                    board[i][move-1] = 0;
                     break;
                 }
             }
