@@ -1,6 +1,4 @@
-package linkedlist;
-
-import java.util.List;
+package datastructure.linkedlist;
 
 public class DoublyLinkedList<T> {
 

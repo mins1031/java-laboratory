@@ -1,9 +1,7 @@
-package maplab;
+package datastructure.maplab;
 
 import callby.Student;
-import programmers.MatrixPlus;
 
-import javax.sql.rowset.serial.SerialStruct;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
