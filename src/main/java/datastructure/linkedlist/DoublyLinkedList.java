@@ -2,8 +2,8 @@ package datastructure.linkedlist;
 
 public class DoublyLinkedList<T> {
 
-    private DoublyListNode<T> head = null;
-    private DoublyListNode<T> tail = null;
+    private DoublyListNode<T> head;
+    private DoublyListNode<T> tail;
     private int size;
 
     public DoublyLinkedList() {
