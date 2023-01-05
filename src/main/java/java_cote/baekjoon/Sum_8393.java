@@ -14,5 +14,9 @@ public class Sum_8393 {
         }
 
         System.out.println(result);
+
+        Integer inputToInt = Integer.valueOf(input);
+        result = inputToInt*(inputToInt+1)/2;
+        System.out.println(result);
     }
 }
