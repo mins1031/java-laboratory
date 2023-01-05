@@ -1,6 +1,5 @@
 package datastructure.stack;
 
-import datastructure.queue.QueueNode;
 
 import java.util.EmptyStackException;
 
