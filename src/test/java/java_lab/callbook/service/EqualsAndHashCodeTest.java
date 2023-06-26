@@ -4,9 +4,13 @@ import java_lab.equals_hashcode.BasicStudent;
 import java_lab.equals_hashcode.DefinedEqualsAndHashcodeStudent;
 import java_lab.equals_hashcode.equals_problum.BasicOrder;
 import java_lab.equals_hashcode.equals_problum.DeliveryBasicOrder;
+import java_lab.equals_hashcode.hashcode_problem.HashTeam;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EqualsAndHashCodeTest {
 
@@ -67,6 +71,7 @@ public class EqualsAndHashCodeTest {
         BasicOrder basicOrder = new BasicOrder("basicOrder", 10000);
         DeliveryBasicOrder deliveryBasicOrder = new DeliveryBasicOrder("basicOrder", 10000, 50);
 
+
         //when
         boolean basicOrderResult = basicOrder.equals(deliveryBasicOrder);
         boolean deliveryOrderResult = deliveryBasicOrder.equals(basicOrderResult);
@@ -74,5 +79,23 @@ public class EqualsAndHashCodeTest {
         //then
         Assertions.assertTrue(basicOrderResult);
         Assertions.assertFalse(deliveryOrderResult);
+    }
+
+    @DisplayName("")
+    @Test
+    public void Equals만구현() {
+        //given
+        Map<HashTeam,String> leaders = new HashMap<>();
+        String expectTeamLeader = "Anne";
+        leaders.put(new HashTeam("New York", "development"), expectTeamLeader);
+        leaders.put(new HashTeam("Boston", "development"), "Brian");
+        leaders.put(new HashTeam("Boston", "marketing"), "Charlie");
+
+        //when
+        HashTeam myTeam = new HashTeam("New York", "development");
+        String myTeamLeader = leaders.get(myTeam);
+
+        //then
+        Assertions.assertFalse(expectTeamLeader.equals(myTeamLeader));
     }
 }
