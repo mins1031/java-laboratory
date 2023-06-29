@@ -9,10 +9,10 @@ public class OverrideChildTeam extends OverloadTeam {
     }
 
     @Override
-    public String pringNameAndMemberCount() throws Exception {
-        if (this.childName == null) {
+    public String pringNameAndMemberCount() /*throws Exception*/ {
+        /*if (this.childName == null) {
             throw new Exception();
-        }
+        }*/
         return getName() + getMembersCount() + this.childName;
     }
 }
