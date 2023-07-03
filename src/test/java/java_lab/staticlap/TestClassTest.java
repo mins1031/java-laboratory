@@ -3,6 +3,8 @@ package java_lab.staticlap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.ref.SoftReference;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestClassTest {
@@ -16,5 +18,17 @@ class TestClassTest {
         SuperUtility superUtility2 = new SubUtility();
         Assertions.assertEquals("no staticECHO", superUtility2.echoItNotStatic("ECHO"));
         Assertions.assertNotEquals("SUPER", superUtility2.echoItNotStatic("ECHO"));
+    }
+
+    @Test
+    void name() {
+        Object obj = new Object();
+        SoftReference<Object> softRef = new SoftReference<>(obj);
+        obj = null;
+
+        System.gc();
+
+        // GC 가 여유롭다면 해시코드를 확인할 수 있다.
+        System.out.println(softRef.get());
     }
 }
