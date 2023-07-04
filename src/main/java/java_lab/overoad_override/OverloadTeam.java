@@ -1,4 +1,4 @@
-package java_lab.equals_hashcode.overoad_override;
+package java_lab.overoad_override;
 
 public class OverloadTeam {
     private String name;
@@ -16,6 +16,10 @@ public class OverloadTeam {
     public String printName(int code) {
         return this.name + code;
     }
+
+//    public int printName(int code2) {
+//        return code2;
+//    }
 
     public String pringNameAndMemberCount() throws IllegalStateException {
         if (this.name == null) {

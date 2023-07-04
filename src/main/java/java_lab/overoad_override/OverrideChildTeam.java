@@ -1,4 +1,4 @@
-package java_lab.equals_hashcode.overoad_override;
+package java_lab.overoad_override;
 
 public class OverrideChildTeam extends OverloadTeam {
     private String childName;
