@@ -19,4 +19,13 @@ public class FinalMethodClass {
 //        test = 4; => 사용 못함
     }
 
+    public int[] multiply(int[] inputs, int multiplier) {
+        int[] nums = new int[inputs.length];
+        for (int i =0; i < inputs.length; i++) {
+            nums[i] = inputs[i] * multiplier;
+        }
+
+        return nums;
+    }
+
 }
