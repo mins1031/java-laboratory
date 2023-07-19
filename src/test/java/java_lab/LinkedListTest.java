@@ -74,21 +74,20 @@ public class LinkedListTest {
         ArrayList<String> arrayList = new ArrayList<>();
         LinkedList<String> linkedList = new LinkedList<>();
         long arrayListStartTime = System.nanoTime();
-        for (int index = 1; index < 5000001; index++) {
+        for (int index = 1; index < 100001; index++) {
             String addWord = sample + index;
-            arrayList.add(addWord);
+            arrayList.add(0, addWord);
         }
         long arrayListEndTime = System.nanoTime();
         long arrayListRemoveTime = arrayListEndTime - arrayListStartTime;
 
         long linkedListStartTime = System.nanoTime();
-        for (int index = 1; index < 5000001; index++) {
+        for (int index = 1; index < 100001; index++) {
             String addWord = sample + index;
-            linkedList.add(addWord);
+            linkedList.addFirst(addWord);
         }
         long linkedListEndTime = System.nanoTime();
         long linkedListRemoveTime = linkedListEndTime - linkedListStartTime;
-
         System.out.println("arrayList add time = " + arrayListRemoveTime);
         System.out.println("linkedList add time = " + linkedListRemoveTime);
     }
