@@ -1,4 +1,4 @@
-package java_lab._동시성._volatile;
+package java_lab._동시성._volatile_atomic;
 
 public class Order {
     private int id;
