@@ -14,19 +14,19 @@ class SafeCounterWithLockTest {
         NormalCounter normalCounter = new NormalCounter();
 
         Thread a = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                normalCounter.decrement();
+            for (int i = 0; i<3000; i++) {
+                normalCounter.increment();
             }
         });
         Thread b = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                normalCounter.decrement();
+            for (int i = 0; i<3000; i++) {
+                normalCounter.increment();
             }
         });
 
         Thread c = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                normalCounter.decrement();
+            for (int i = 0; i<3000; i++) {
+                normalCounter.increment();
             }
         });
 
@@ -38,7 +38,7 @@ class SafeCounterWithLockTest {
 
         //then
         Thread.sleep(1000);
-        Assertions.assertEquals(0, normalCounter.getCounter());
+        Assertions.assertEquals(9000, normalCounter.getCounter());
         System.out.println("plus counter value = " + normalCounter.getCounter());
     }
 
@@ -49,18 +49,18 @@ class SafeCounterWithLockTest {
         SafeCounterWithLock safeCounterWithLock = new SafeCounterWithLock();
 
         Thread a = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                safeCounterWithLock.decrement();
+            for (int i = 0; i<3000; i++) {
+                safeCounterWithLock.increment();
             }
         });
         Thread b = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                safeCounterWithLock.decrement();
+            for (int i = 0; i<3000; i++) {
+                safeCounterWithLock.increment();
             }
         });
         Thread c = new Thread(() -> {
-            for (int i = 0; i<1000; i++) {
-                safeCounterWithLock.decrement();
+            for (int i = 0; i<3000; i++) {
+                safeCounterWithLock.increment();
             }
         });
 
@@ -72,7 +72,7 @@ class SafeCounterWithLockTest {
 
         //then
         Thread.sleep(1000);
-        Assertions.assertEquals(0, safeCounterWithLock.getCounter());
+        Assertions.assertEquals(9000, safeCounterWithLock.getCounter());
         System.out.println("plus counter value = " + safeCounterWithLock.getCounter());
     }
 

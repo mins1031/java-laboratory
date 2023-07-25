@@ -45,4 +45,30 @@ class ThreadLabMainTest {
         Thread.sleep(100); // 모든 스레드가 종료될 때까지 잠깐 대기
         Assertions.assertEquals(count,maxCnt);
     }
+
+    @DisplayName("Runnable과 Thread")
+    @Test
+    void 스레드_테스트() {
+        RunnableSample runnableSample = new RunnableSample();
+        ThreadSample threadSample = new ThreadSample();
+
+        new Thread(runnableSample).start();
+        threadSample.start();
+
+        System.out.println("테스트 메서드 종료.");
+    }
+
+    public class RunnableSample implements Runnable {
+        @Override
+        public void run() {
+            System.out.println("RunnableSample 클래스 run() 실행");
+        }
+    }
+
+    public class ThreadSample extends Thread {
+        @Override
+        public void run() {
+            System.out.println("ThreadSample 클래스 run() 실행");
+        }
+    }
 }

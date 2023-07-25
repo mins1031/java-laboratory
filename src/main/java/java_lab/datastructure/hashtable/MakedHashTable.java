@@ -2,7 +2,7 @@ package java_lab.datastructure.hashtable;
 
 import java.util.LinkedList;
 
-public class HashTable {
+public class MakedHashTable {
     class HashTableNode {
         private String key;
         private String value;
@@ -23,7 +23,7 @@ public class HashTable {
 
     private LinkedList<HashTableNode>[] data;
 
-    public HashTable(int size) {
+    public MakedHashTable(int size) {
         this.data = new LinkedList[size];
     }
 

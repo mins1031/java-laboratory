@@ -31,8 +31,18 @@ public class MashTest2 {
     }
 
     public static void main(String[] args) {
-//        List<Integer> integers = Arrays.asList(3, 3, 1, 2, 1);
-        List<Integer> integers = Arrays.asList(7, 12, 3);
-        System.out.println(groupSort(integers));
+//        List<Integer> integers = Arrays.asList(7, 12, 3);
+//        System.out.println(groupSort(integers));
+
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 11, 7, 8, 9, 10);
+        integers.stream().forEach(integer -> {
+                    try {
+                        LoopObject.occurExceptionWhenValueOverTen(integer);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage());
+                    }
+                }
+        );
     }
 }

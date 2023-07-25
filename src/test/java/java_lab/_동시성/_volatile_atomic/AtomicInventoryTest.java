@@ -13,7 +13,7 @@ class AtomicInventoryTest {
         AtomicInventory atomicInventory = new AtomicInventory();
         int currentValue = atomicInventory.atomicInteger.get();
         System.out.println(currentValue);
-        System.out.println(atomicInventory.atomicInteger.compareAndSet(currentValue, ));
+//        System.out.println(atomicInventory.atomicInteger.compareAndSet(currentValue, ));
         System.out.println(atomicInventory.atomicInteger.get());
 
         //when
