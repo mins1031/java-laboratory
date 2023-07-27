@@ -48,10 +48,6 @@ public class ConcurrentTest {
     @DisplayName("")
     @Test
     public void 해시테이블로_동시접근_시간측정() throws InterruptedException {
-        String bedKey = "침대";
-        String chairKey = "의자";
-        String tableKey = "식탁";
-
         long startTime = System.currentTimeMillis();
 
         ExecutorService executor = Executors.newFixedThreadPool(3);
@@ -83,9 +79,6 @@ public class ConcurrentTest {
     @DisplayName("")
     @Test
     void concurrent해시맵_동시접근_시간측정() throws InterruptedException {
-        String bedKey = "침대";
-        String chairKey = "의자";
-        String tableKey = "식탁";
         long startTime = System.currentTimeMillis();
 
         ExecutorService executor = Executors.newFixedThreadPool(3);
