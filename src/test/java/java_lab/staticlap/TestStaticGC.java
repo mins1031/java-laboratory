@@ -15,8 +15,9 @@ public class TestStaticGC {
 
     @Test
     void name3() throws InterruptedException {
-        addCacheInNormalList(StaticListCacheMain.staticList);
-
+        for (int i = 0; i < 5; i++) {
+            StaticListCacheMain.staticList = addCacheInNormalList();
+        }
         System.out.println("now = " + LocalDateTime.now());
 //        extracted(StaticListCacheMain.staticList);
 
@@ -29,103 +30,33 @@ public class TestStaticGC {
     @Test
     void name2() throws InterruptedException {
         //1
-        addCacheInNormalList(normalList);
-
-        System.out.println(normalList.size());
         for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
-            System.out.println("5초 대기");
+            normalListCacheMain.normalList = addCacheInNormalList();
         }
+
         System.out.println("일반 테스트 메서드 종료");
     }
 
     private List<Cache> addCacheInNormalList() throws InterruptedException {
-        System.out.println(LocalDateTime.now());
+//        System.out.println(LocalDateTime.now());
         List<Cache> tempList = new ArrayList<>();
         for (int j = 0; j < 100_000; j++) {
             tempList.add(new Cache(random.nextInt(50000)));
         }
+
+//        Thread.sleep(500);
+
+//        System.out.println("0.5초 대기");
         return tempList;
-        for (int i = 0; i < 5; i++) {
-            Thread.sleep(1000);
-            System.out.println("5초 대기");
-        }
-
+        //16546K->7081K(34304K), 0.0055811
     }
 
-    private void extracted(List<Cache> normalList) {
-        normalList.get(20);
-        normalList.get(5000);
-        normalList.get(52000);
-        normalList.get(2030);
-        normalList.get(2023);
-    }
 
+    List<Cache> cacheList2 = new ArrayList<>();
     @Test
     void name() throws InterruptedException {
-        HashMap<UUID, Cache> normalCacheMap = normalCacheMain.normalCacheMap;
-        Random random = new Random();
-
-        //1
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
+        for (int j = 0; j < 100_000_000; j++) {
+            cacheList2.add(new Cache(random.nextInt(50000)));
         }
-
-        Thread.sleep(1000);
-        //2
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-
-        Thread.sleep(1000);
-        //3
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-
-        Thread.sleep(1000);
-        //4
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-        Thread.sleep(1000);
-
-        //5
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-        Thread.sleep(1000);
-
-        //1
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-
-        Thread.sleep(1000);
-        //2
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-
-        Thread.sleep(1000);
-        //3
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-
-        Thread.sleep(1000);
-        //4
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-        Thread.sleep(1000);
-
-        //5
-        for (int i = 0; i < 200000; i++) {
-            normalCacheMap.put(UUID.randomUUID(), new Cache(random.nextInt(50000)));
-        }
-        Thread.sleep(1000);
-
-        System.out.println(normalCacheMap.size());
     }
 }
