@@ -4,11 +4,13 @@ import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
+import java.util.WeakHashMap;
 
 public class PhantomReferenceExample {
     public static void main(String[] args) throws InterruptedException {
         BigObject strong = new BigObject();
         ReferenceQueue<BigObject> rq = new ReferenceQueue<>();
+        WeakHashMap<Object, Object> objectObjectWeakHashMap = new WeakHashMap<>();
 
 //        BigObjectReference<BigObject> phantom = new BigObjectReference<>(strong, rq);
         PhantomReference<BigObject> phantom = new PhantomReference<>(strong, rq);
