@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
 import java.util.WeakHashMap;
 
@@ -14,7 +15,7 @@ class ChatRoomTest {
 
     @DisplayName("")
     @Test
-    void name() throws InterruptedException {
+    void weakReference_list_test() throws InterruptedException {
         //given
         ChatRoom chatRoom = new ChatRoom();
         User min = new User("min");
@@ -58,4 +59,17 @@ class ChatRoomTest {
         Assertions.assertFalse(map.containsKey(imageNameFirst));
         Assertions.assertTrue(map.containsKey(imageNameSecond));
     }
+
+    @DisplayName("")
+    @Test
+    public void name() {
+        HashMap<String, Integer> scoreCache = new HashMap<>();
+        scoreCache.put("min", 90);
+        scoreCache.put("yoon", 80);
+        scoreCache.put("pyo", 70);
+
+        System.out.println(scoreCache.get("min"));
+        System.out.println(scoreCache.get("test"));
+    }
+
 }
