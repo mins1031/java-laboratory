@@ -15,7 +15,8 @@ class LRUCacheTest {
     LRUCache lruCache = new LRUCache(20);
 
     @Test
-    public void normal_HashMap_OOM_Test() {
+    public void normal_HashMap_OOM_Test() throws InterruptedException {
+        Thread.sleep(3000);
         for (int i = 0; i < 5000000; i++) {
             String key = UUID.randomUUID().toString();
             int value = random.nextInt();
