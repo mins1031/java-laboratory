@@ -1,8 +1,6 @@
 package java_lab.reference;
 
-import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -17,7 +15,8 @@ public class WeakCache<K, V> {
 
     public void put(K key, V value) {
         cleanWeakCache();
-        weakCacheMap.put(key, new WeakCacheContent<K, V>(key, value, queue));
+//        WeakCacheContent<K, V> value1 = new WeakCacheContent<>(key, value, queue);
+        weakCacheMap.put(key, new WeakCacheContent<>(key, value, queue));
     }
 
     private void cleanWeakCache()  {
@@ -26,6 +25,8 @@ public class WeakCache<K, V> {
         }
         WeakCacheContent<K, V> wrappedCacheContent;
         while ((wrappedCacheContent = (WeakCacheContent<K, V>) queue.poll()) != null) {
+            System.out.println(queue.poll());
+            System.out.println("cl");
             weakCacheMap.remove(wrappedCacheContent.getKey());
         }
     }
