@@ -15,6 +15,10 @@ public class WeakCacheMain {
         for (int i = 0; i < 10_000_000; i++) {
             weakCache.put(key, content);
         }
+
+//        for (int i = 0; i < 100; i++) {
+//            first_loop();
+//        }
     }
 
     public static void first_loop() {

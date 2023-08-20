@@ -3,44 +3,42 @@ package java_lab.reference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class SoftCache<K, V> {
-    private Map<K, SoftReference<WeakCacheContent<K, V>>> weakCacheMap = new HashMap<>();
-    private final ReferenceQueue<WeakCacheContent<K, V>> queue = new ReferenceQueue<>();
+    private Map<K, SoftCacheContent<K, V>> softCacheMap = new HashMap<>();
+    private final ReferenceQueue<V> queue = new ReferenceQueue<>();
 
-    public WeakCacheContent get(K key) {
-        return this.weakCacheMap.get(key).get();
+    public SoftCacheContent get(K key) {
+        return this.softCacheMap.get(key);
     }
 
-    public void put(K key, WeakCacheContent<K, V> value) {
-        cleanWeakCache();
-        weakCacheMap.put(key, new SoftReference<>(value, queue));
+    public void put(K key, V value) {
+//        cleanWeakCache();
+        softCacheMap.put(key, new SoftCacheContent<K, V>(key, value, queue));
     }
 
     private void cleanWeakCache()  {
-        if (weakCacheMap.isEmpty()) {
+        if (softCacheMap.isEmpty()) {
             return;
         }
-        Reference<? extends WeakCacheContent<K, V>> wrappedCacheContent;
-        while ((wrappedCacheContent = queue.poll()) != null) {
-            K key = wrappedCacheContent.get().getKey();
-            weakCacheMap.remove(key);
+        SoftCacheContent<K, V> wrappedCacheContent;
+        while ((wrappedCacheContent = (SoftCacheContent<K, V>) queue.poll()) != null) {
+            softCacheMap.remove(wrappedCacheContent.getKey());
         }
     }
 
     public void displayCache() {
-        for (Map.Entry<K, SoftReference<WeakCacheContent<K, V>>> kWeakReferenceEntry : weakCacheMap.entrySet()) {
+        for (Map.Entry<K, SoftCacheContent<K, V>> kWeakReferenceEntry : softCacheMap.entrySet()) {
             System.out.println("map key = " + kWeakReferenceEntry.getKey());
-            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue().get()).map(value -> value.getValue()).orElse(null));
+            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue()).map(SoftCacheContent::getValue).orElse(null));
             System.out.println("----------------");
         }
     }
 
     public int size() {
-        return this.weakCacheMap.size();
+        return this.softCacheMap.size();
     }
 }

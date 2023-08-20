@@ -39,13 +39,12 @@ class LRUCacheTest {
         objectObjectLRUCache.put("min", "1014");
         objectObjectLRUCache.put("gang", "0612");
         objectObjectLRUCache.put("pyo", "1217");
-        objectObjectLRUCache.get("pyo");
+        objectObjectLRUCache.get("min");
 
         objectObjectLRUCache.displayPriority();
         System.out.println("first displayPriority end!");
 
         objectObjectLRUCache.put("yeon", "0828");
-
         objectObjectLRUCache.displayPriority();
     }
 }

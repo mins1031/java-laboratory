@@ -1,20 +1,42 @@
 package java_lab.reflaction;
 
+@MyAnnotation
 public class Book {
 
-    public static String A = "A";
+    private static String B = "Book";
+    private static final String C = "Book";
 
-    public String B = "B";
+    private String a = "a";
+    public String d = "d";
+    protected String e = "e";
 
     public Book() {
     }
 
-    public Book(String b) {
-        B = b;
+    public Book(String a, String d, String e) {
+        this.a = a;
+        this.d = d;
+        this.e = e;
     }
 
-    public void c() {
-        System.out.println("C");
+    public void f() {
+        System.out.println("F");
+    }
+
+    public void g() {
+        System.out.println("G");
+    }
+
+    public int h() {
+        return 100;
+    }
+
+    private String privateTest() {
+        return "private";
+    }
+
+    protected String protectedTest() {
+        return "protected";
     }
 
     public int sum(int left, int right) {

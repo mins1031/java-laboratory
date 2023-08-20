@@ -34,7 +34,7 @@ public class WeakCache<K, V> {
     public void displayCache() {
         for (Map.Entry<K, WeakCacheContent<K, V>> kWeakReferenceEntry : weakCacheMap.entrySet()) {
             System.out.println("map key = " + kWeakReferenceEntry.getKey());
-            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue()).map(value -> value.getValue()).orElse(null));
+            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue()).map(WeakCacheContent::getValue).orElse(null));
             System.out.println("----------------");
         }
     }
