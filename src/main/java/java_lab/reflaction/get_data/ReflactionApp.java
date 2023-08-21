@@ -1,4 +1,4 @@
-package java_lab.reflaction;
+package java_lab.reflaction.get_data;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class ReflactionApp {
         Class<? extends Book> aClass1 = book.getClass();
 
         // 세번째 : Class.forName()에 패키지 경로를 파라미터로 조회
-        Class<?> aClass = Class.forName("java_lab.reflaction.Book");
+        Class<?> aClass = Class.forName("java_lab.reflaction.get_data.Book");
 
         //getFields는 public한 필드만 확인할수 있다.
         Arrays.stream(bookClass.getFields()).forEach(System.out::println);
@@ -58,12 +58,5 @@ public class ReflactionApp {
         Arrays.stream(bookClass.getAnnotations()).forEach(System.out::println);
 
         System.out.println("------------");
-
-
-//        Constructor<Book> constructor = bookClass.getConstructor(null);
-//        String a = "101011";
-//        for (String arg : a.split("")) {
-//            System.out.println(arg);
-//        }
     }
 }

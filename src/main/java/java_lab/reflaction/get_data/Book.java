@@ -1,4 +1,4 @@
-package java_lab.reflaction;
+package java_lab.reflaction.get_data;
 
 @MyAnnotation
 public class Book {

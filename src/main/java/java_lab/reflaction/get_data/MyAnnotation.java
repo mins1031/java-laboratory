@@ -1,4 +1,4 @@
-package java_lab.reflaction;
+package java_lab.reflaction.get_data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
