@@ -9,7 +9,7 @@ public class LRUCacheMain {
     public static void main(String[] args) throws InterruptedException {
         Random random = new Random();
         Thread.sleep(5000);
-        for (int i = 0; i < 5000000; i++) {
+        for (int i = 0; i < 10_000_000; i++) {
             String key = UUID.randomUUID().toString();
             int value = random.nextInt();
             lruCache.put(key, new CacheContent<>(key, value));

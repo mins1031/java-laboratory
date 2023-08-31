@@ -40,6 +40,7 @@ public class TestCache<K, V> {
         // queue 에는 참조가 약한 객체들이 담겨있고 OOM 을 방지하기 위해 제거한다.
         // 참조 카운트가 0이 된 객체들을 jvm 이 queue 에 담는다
         while ((ref = (CacheSoftReference<K, V>) queue.poll()) != null) {
+            System.out.println("clean");
             map.remove(ref.key);
         }
     }

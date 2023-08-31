@@ -7,14 +7,14 @@ import java.util.UUID;
 
 public class TestCacheMain {
 
-    static TestCache<String, TestContent> contentTestCache = new TestCache();
+    static TestCache<Integer, TestContent> contentTestCache = new TestCache();
 
     public static void main(String[] args) {
         Random random = new Random();
         String key = UUID.randomUUID().toString();
         TestContent content = new TestContent(random.nextInt(5000001));
         for (int i = 0; i < 10000000; i++) {
-            contentTestCache.put(key, content);
+            contentTestCache.put(i++, content);
         }
     }
 

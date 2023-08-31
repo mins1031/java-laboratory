@@ -1,10 +1,8 @@
 package java_lab.reference;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
-import java.util.UUID;
 
 class WeakCacheTest {
     WeakCache<String, Integer> weakCache = new WeakCache<>();

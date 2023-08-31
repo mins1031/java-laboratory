@@ -16,8 +16,9 @@ public class SoftCache<K, V> {
     }
 
     public void put(K key, V value) {
-//        cleanWeakCache();
-        softCacheMap.put(key, new SoftCacheContent<K, V>(key, value, queue));
+        cleanWeakCache();
+        SoftCacheContent<K, V> value1 = new SoftCacheContent<>(key, value, queue);
+        softCacheMap.put(key, value1);
     }
 
     private void cleanWeakCache()  {
@@ -33,7 +34,7 @@ public class SoftCache<K, V> {
     public void displayCache() {
         for (Map.Entry<K, SoftCacheContent<K, V>> kWeakReferenceEntry : softCacheMap.entrySet()) {
             System.out.println("map key = " + kWeakReferenceEntry.getKey());
-            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue()).map(SoftCacheContent::getValue).orElse(null));
+//            System.out.println("map value = " + Optional.ofNullable(kWeakReferenceEntry.getValue()).map(value -> value.get).orElse(null));
             System.out.println("----------------");
         }
     }
