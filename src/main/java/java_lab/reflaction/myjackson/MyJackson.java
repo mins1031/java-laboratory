@@ -1,10 +1,14 @@
 package java_lab.reflaction.myjackson;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyJackson {
 
@@ -95,15 +99,55 @@ public class MyJackson {
         stringBuilder.append("," + "\n");
     }
 
-    private <T> void generateDoubleJsonLineInList(StringBuilder stringBuilder, String element) throws IllegalAccessException {
+    private <T> void generateDoubleJsonLineInList(StringBuilder stringBuilder, String element) {
         stringBuilder.append("    ");
         stringBuilder.append("    ");
         stringBuilder.append(element);
         stringBuilder.append("," + "\n");
     }
 
-    public <T> T deserialize(String request) {
+    public <T> T deserialize(String request, Class<?> clazz) throws ReflectiveOperationException {
+        Class<?> aClass = Class.forName(clazz.getName());
+        Constructor<?> noParamConstructor = aClass.getConstructor();
+        Object instance = noParamConstructor.newInstance();
+        Arrays.stream(clazz.getDeclaredFields()).forEach(field -> {
+            field.setAccessible(true);
+            Class<?> type = field.getType();
+            String typeName = type.getName();
+            String fieldName = field.getName();
+            int i = request.indexOf(fieldName);
+
+            String substring = request.substring(i, i + fieldName.length() + 3);
+            if (isKeyField(fieldName, substring)) {
+                Pattern pattern = Pattern.compile(substring + "(.*?)(,)");
+                Matcher matcher = pattern.matcher(request);
+                if (matcher.find()) {
+                    String matchValue = matcher.group(1).trim();
+                    if (matchValue == null) {
+                        throw new RuntimeException();
+                    }
+
+                }
+
+
+            }
+
+
+
+//            String[] split = request.split(fieldName, 2);
+//            if (split.length <= 1) {
+//                throw new RuntimeException();
+//            }
+//            String substring = split[1].substring(0, 1);
+//            System.out.println(substring);
+//            System.out.println(substring.equals(checkSubStringIsKey));
+        });
         T name = null;
         return name;
+    }
+
+    private boolean isKeyField(String fieldName, String substring) {
+        String checkSubStringIsKey = " :";
+        return substring.equals(fieldName + "\"" + checkSubStringIsKey);
     }
 }

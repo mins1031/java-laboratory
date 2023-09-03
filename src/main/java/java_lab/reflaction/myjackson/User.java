@@ -10,6 +10,9 @@ public class User {
     private List<String> stringList = new ArrayList<>();
     private List<Double> doubleList = new ArrayList<>();
 
+    public User() {
+    }
+
     public User(String name, double age, List<String> stringList, List<Double> doubleList) {
         this.name = name;
         this.age = age;
@@ -31,5 +34,15 @@ public class User {
 
     public List<Double> getDoubleList() {
         return doubleList;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", stringList=" + stringList +
+                ", doubleList=" + doubleList +
+                '}';
     }
 }

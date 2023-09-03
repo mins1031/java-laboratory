@@ -11,6 +11,7 @@ public class ReflactionApp {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchFieldException {
         Class<?> bookClass = Class.forName("java_lab.reflaction.use_data.Book");
         Constructor<?> constructorInString = bookClass.getConstructor(String.class);
+        Constructor<?> constructorInString2 = bookClass.getConstructor();
         Book myBook = (Book) constructorInString.newInstance("myBook");
         System.out.println(myBook);
 
