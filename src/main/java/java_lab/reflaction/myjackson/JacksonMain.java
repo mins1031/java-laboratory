@@ -17,16 +17,16 @@ public class JacksonMain {
                 "    \"age\" : 28.82,\n" +
                 "    \"stringList\" : [ \n" +
                 "        \"string1\",\n" +
-                "        \"string2\",\n" +
+                "        \"string2\"\n" +
                 "    ], \n" +
                 "    \"doubleList\" : [ \n" +
                 "        25.6,\n" +
                 "        3.14,\n" +
-                "        179.8,\n" +
+                "        179.8\n" +
                 "    ], \n" +
                 "}";
         System.out.println(User.class.getName());
         User deserializeUser = (User) myJackson.deserialize(requestJson, User.class);
-        System.out.println(user);
+        System.out.println("deserialize result = " + deserializeUser);
     }
 }

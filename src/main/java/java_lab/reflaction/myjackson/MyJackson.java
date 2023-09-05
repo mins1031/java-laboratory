@@ -1,14 +1,16 @@
 package java_lab.reflaction.myjackson;
 
+import com.sun.xml.internal.ws.util.xml.CDATA;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class MyJackson {
 
@@ -106,48 +108,121 @@ public class MyJackson {
         stringBuilder.append("," + "\n");
     }
 
-    public <T> T deserialize(String request, Class<?> clazz) throws ReflectiveOperationException {
+    public Object deserialize(String request, Class<?> clazz) throws ReflectiveOperationException {
         Class<?> aClass = Class.forName(clazz.getName());
-        Constructor<?> noParamConstructor = aClass.getConstructor();
+        Constructor<?> noParamConstructor = aClass.getDeclaredConstructor();
         Object instance = noParamConstructor.newInstance();
+//        User userInstance = (User) noParamConstructor.newInstance();
+
         Arrays.stream(clazz.getDeclaredFields()).forEach(field -> {
             field.setAccessible(true);
-            Class<?> type = field.getType();
-            String typeName = type.getName();
             String fieldName = field.getName();
-            int i = request.indexOf(fieldName);
+            int fieldNameStartIndex = request.indexOf(fieldName);
+            int fieldNameEndIndex = fieldNameStartIndex + fieldName.length() + 3;
+            int fieldValueStartIndex = fieldNameEndIndex + 1;
+            String substring = request.substring(fieldNameStartIndex, fieldNameEndIndex);
 
-            String substring = request.substring(i, i + fieldName.length() + 3);
-            if (isKeyField(fieldName, substring)) {
+            if (isKeyField(fieldName, substring) && isSingleVariable(request, fieldValueStartIndex)) {
                 Pattern pattern = Pattern.compile(substring + "(.*?)(,)");
                 Matcher matcher = pattern.matcher(request);
                 if (matcher.find()) {
-                    String matchValue = matcher.group(1).trim();
-                    if (matchValue == null) {
+                    String matchValueStringType = matcher.group(1).trim();
+                    Double matchValueDoubleType;
+                    if (matchValueStringType == null) {
                         throw new RuntimeException();
                     }
 
+                    matchValueDoubleType = checkMatcherTypeIsDouble(matchValueStringType);
+
+                    if (matchValueDoubleType == null) {
+                        try {
+                            field.set(instance, matchValueStringType);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            field.set(instance, matchValueDoubleType);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } else {
+                String fieldListValue = request.substring(fieldValueStartIndex);
+                boolean isStringValue = false;
+                StringBuilder stringBuilder = new StringBuilder();
+                char[] chars = fieldListValue.toCharArray();
+                for (char aChar : chars) {
+                    if (aChar == '[') {
+                        continue;
+                    }
+
+                    if (aChar == ' ') {
+                        continue;
+                    }
+
+                    if (aChar == ']') {
+                        break;
+                    }
+
+                    if (aChar == '\"') {
+                        isStringValue = true;
+                    }
+
+                    stringBuilder.append(aChar);
                 }
 
-
+                if (isStringValue) {
+                    try {
+                        List<String> stringListValues = Arrays.stream(stringBuilder.toString().split(","))
+                                .map(data -> data.replaceAll("\n", ""))
+                                .collect(Collectors.toList());
+                        field.set(instance, stringListValues);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    setDoubleListField(instance, field, stringBuilder);
+                }
             }
 
-
-
-//            String[] split = request.split(fieldName, 2);
-//            if (split.length <= 1) {
-//                throw new RuntimeException();
-//            }
-//            String substring = split[1].substring(0, 1);
-//            System.out.println(substring);
-//            System.out.println(substring.equals(checkSubStringIsKey));
         });
-        T name = null;
-        return name;
+
+        return instance;
+    }
+
+    private void setDoubleListField(Object instance, Field field, StringBuilder stringBuilder) {
+        try {
+            String[] split = stringBuilder.toString().split(",");
+            List<Double> doubleListValues = Arrays.stream(split)
+                    .map(data -> data.replaceAll("\n", ""))
+                    .filter(data -> (!data.isEmpty() || !data.equals("")))
+                    .map(data -> Double.valueOf(data))
+                    .collect(Collectors.toList());
+            field.set(instance, doubleListValues);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isKeyField(String fieldName, String substring) {
         String checkSubStringIsKey = " :";
         return substring.equals(fieldName + "\"" + checkSubStringIsKey);
     }
+
+    private boolean isSingleVariable(String request, int fieldValueStartIndex) {
+        String fieldValueHeadChar = String.valueOf(request.charAt(fieldValueStartIndex));
+        return !fieldValueHeadChar.equals("[");
+    }
+    private Double checkMatcherTypeIsDouble(String matchValueStringType) {
+        Double matchValueDoubleType;
+        try {
+            matchValueDoubleType = Double.parseDouble(matchValueStringType);
+        } catch (NumberFormatException e) {
+            matchValueDoubleType = null;
+        }
+        return matchValueDoubleType;
+    }
+
 }
