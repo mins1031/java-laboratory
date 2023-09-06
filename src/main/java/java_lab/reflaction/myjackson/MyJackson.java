@@ -112,7 +112,6 @@ public class MyJackson {
         Class<?> aClass = Class.forName(clazz.getName());
         Constructor<?> noParamConstructor = aClass.getDeclaredConstructor();
         Object instance = noParamConstructor.newInstance();
-//        User userInstance = (User) noParamConstructor.newInstance();
 
         Arrays.stream(clazz.getDeclaredFields()).forEach(field -> {
             field.setAccessible(true);
