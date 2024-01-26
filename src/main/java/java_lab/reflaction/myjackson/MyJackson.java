@@ -1,7 +1,5 @@
 package java_lab.reflaction.myjackson;
 
-import com.sun.xml.internal.ws.util.xml.CDATA;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
