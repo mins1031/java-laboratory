@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab.callbook.service.CallBookServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-26T08:58:24" hostname="Macbookui-MacBookAir.local" time="0.128">
+  <properties/>
+  <testcase name="이름_벨류_번호_키_속도()" classname="java_lab.callbook.service.CallBookServiceTest" time="0.128"/>
+  <system-out><![CDATA[8
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

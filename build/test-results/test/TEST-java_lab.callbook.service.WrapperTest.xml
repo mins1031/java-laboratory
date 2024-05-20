@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab.callbook.service.WrapperTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-26T08:58:24" hostname="Macbookui-MacBookAir.local" time="0.001">
+  <properties/>
+  <testcase name="wrapper, primitive int 동등성 비교" classname="java_lab.callbook.service.WrapperTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

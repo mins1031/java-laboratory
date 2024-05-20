@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab.staticlap.TestStaticGC" tests="1" skipped="1" failures="0" errors="0" timestamp="2024-01-26T08:58:24" hostname="Macbookui-MacBookAir.local" time="121.245">
+  <properties/>
+  <testcase name="name()" classname="java_lab.staticlap.TestStaticGC" time="121.245">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

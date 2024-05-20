@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab.staticlap.TestClassTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-26T08:58:24" hostname="Macbookui-MacBookAir.local" time="0.022">
+  <properties/>
+  <testcase name="whenStaticUtilClassInheritance_thenOverridingFails()" classname="java_lab.staticlap.TestClassTest" time="0.0"/>
+  <testcase name="name()" classname="java_lab.staticlap.TestClassTest" time="0.022"/>
+  <system-out><![CDATA[java.lang.Object@51662074
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

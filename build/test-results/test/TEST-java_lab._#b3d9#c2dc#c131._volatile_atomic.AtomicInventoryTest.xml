@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab._동시성._volatile_atomic.AtomicInventoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-26T08:58:14" hostname="Macbookui-MacBookAir.local" time="0.006">
+  <properties/>
+  <testcase name="name()" classname="java_lab._동시성._volatile_atomic.AtomicInventoryTest" time="0.006"/>
+  <system-out><![CDATA[100
+100
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

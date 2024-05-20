@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="java_lab._동시성._volatile_atomic.ConcurrentTest" tests="3" skipped="1" failures="0" errors="0" timestamp="2024-01-26T08:58:14" hostname="Macbookui-MacBookAir.local" time="6.836">
+  <properties/>
+  <testcase name="test()" classname="java_lab._동시성._volatile_atomic.ConcurrentTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="해시테이블로_동시접근_시간측정()" classname="java_lab._동시성._volatile_atomic.ConcurrentTest" time="4.098"/>
+  <testcase name="concurrent해시맵_동시접근_시간측정()" classname="java_lab._동시성._volatile_atomic.ConcurrentTest" time="2.737"/>
+  <system-out><![CDATA[end
+수행시간 = 4097
+50000002
+50000001
+50000003
+50000004
+end
+수행시간 = 2737
+50000002
+50000001
+50000003
+50000004
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
