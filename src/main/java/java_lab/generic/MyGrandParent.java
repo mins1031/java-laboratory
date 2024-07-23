@@ -1,6 +1,5 @@
 package java_lab.generic;
 
-import jdk.jfr.TransitionTo;
 
 public class MyGrandParent {
     private String name;

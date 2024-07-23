@@ -1,6 +1,5 @@
 package java_lab.staticlap;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 
 
 public class Cache {
