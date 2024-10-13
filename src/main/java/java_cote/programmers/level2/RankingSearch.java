@@ -31,6 +31,25 @@ public class RankingSearch {
         return results.stream().mapToInt(i -> i).toArray();
     }
 
+    private int findLowestScoreIndex(String[] infos, int splitQuery) {
+        int start = 0;
+        int end = infos.length;
+
+        while (start != end) {
+            int mid = (end + start) / 2;
+            String midInfo = infos[mid];
+            int midInfoScore = Integer.parseInt(midInfo.split(" ")[LAST_INDEX]);
+
+            if (midInfoScore >= splitQuery) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return start;
+    }
+
     private Integer countSupporterInCondition(int startIndex, String[] infos, String[] splitQuery) {
         String languageCon = splitQuery[0];
         String positionCon = splitQuery[1];
@@ -52,25 +71,6 @@ public class RankingSearch {
         }
 
         return count;
-    }
-
-    private int findLowestScoreIndex(String[] infos, int splitQuery) {
-        int start = 0;
-        int end = infos.length;
-
-        while (start != end) {
-            int mid = (end + start) / 2;
-            String midInfo = infos[mid];
-            int midInfoScore = Integer.parseInt(midInfo.split(" ")[LAST_INDEX]);
-
-            if (midInfoScore >= splitQuery) {
-                end = mid - 1;
-            } else {
-                start = mid + 1;
-            }
-        }
-
-        return start;
     }
 
     public static void main(String[] args) {
