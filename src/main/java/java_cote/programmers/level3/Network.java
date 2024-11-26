@@ -1,8 +1,12 @@
 package java_cote.programmers.level3;
 
+import java.util.Arrays;
+
 public class Network {
+    private int count = 1;
+    private int n;
     public int solution(int n, int[][] computers) {
-        int result = n;
+        this.n = n;
         int[][] mem = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -10,39 +14,57 @@ public class Network {
             }
         }
 
-        int count = 1;
-        checkLink(0, computers, mem, count);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (computers[i][j] == 0) {
+                    continue;
+                }
 
-        return result;
+                if (mem[i][j] != 0) {
+                    continue;
+                }
+
+                loop(i, computers, mem, count);
+                count++;
+            }
+        }
+
+        return Arrays.stream(mem).flatMapToInt(Arrays::stream).summaryStatistics().getMax();
     }
 
-    private void checkLink(int i, int[][] computers, int[][] mem, int count) {
-        for (int k = 0; k < i; k++) {
-            if (computers[i][k] == 0) {
+    public void loop(int yline, int[][] computers, int[][] mem, int count) {
+        // 여기서 파고 들어가야됨
+        // 해당 라인 값 dfs 적용
+        for (int i = 0; i < n; i++) {
+            if (computers[yline][i] == 0) {
                 continue;
             }
 
-            if (mem[i][k] == 1) {
-                return;
+            if (mem[yline][i] != 0) {
+                continue;
             }
 
-            mem[i][k] = count;
-            checkLink(k, computers, mem, count);
+            mem[yline][i] = count;
+            loop(i, computers, mem, count);
         }
     }
 
-    public void loop() {
-        // 여기서 파고 들어가야됨
-        // 해당 라인 값 dfs 적용
-        // 
-    }
-
     public static void main(String[] args) {
-        int n = 3;
+        int n = 6;
         int[][] computers = {
-                {1, 1, 0},
-                {1, 1, 1},
-                {0, 1, 1}
+//                {1, 1, 0},
+//                {1, 1, 0},
+//                {0, 0, 1}
+//                {1, 1, 0},
+//                {1, 1, 1},
+//                {0, 1, 1}
+                {1, 1, 0, 1, 1, 0},
+                {1, 1, 0, 0, 1, 0},
+                {0, 0, 1, 1, 0, 1},
+                {1, 0, 1, 1, 0, 0},
+                {1, 1, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0, 1}
+
         };
         Network network = new Network();
         int solution = network.solution(n, computers);
