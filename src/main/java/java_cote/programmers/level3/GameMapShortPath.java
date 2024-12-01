@@ -37,6 +37,13 @@ public class GameMapShortPath {
         int answer = 200;
         width = maps[0].length;
         height = maps.length;
+        boolean[][] mem = new boolean[height][width];
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                mem[i][j] = false;
+            }
+        }
 
         Queue<State> queue = new LinkedList<>();
         queue.add(new State(0, 0, 1, 0, 0));
@@ -52,20 +59,22 @@ public class GameMapShortPath {
                 continue;
             }
 
-            if (!checkCanNotAdd(state.x, state.y + 1, state.beforeX, state.beforeY, maps))
+            mem[state.x][state.y] = true;
+
+            if (!checkCanNotAdd(state.x, state.y + 1, state.beforeX, state.beforeY, maps, mem))
                 queue.add(new State(state.x, state.y + 1, state.currentCount + 1, state.x, state.y)); // 동
-            if (!checkCanNotAdd(state.x, state.y - 1, state.beforeX, state.beforeY, maps))
+            if (!checkCanNotAdd(state.x, state.y - 1, state.beforeX, state.beforeY, maps, mem))
                 queue.add(new State(state.x, state.y - 1, state.currentCount + 1, state.x, state.y)); // 서
-            if (!checkCanNotAdd(state.x + 1, state.y, state.beforeX, state.beforeY, maps))
+            if (!checkCanNotAdd(state.x + 1, state.y, state.beforeX, state.beforeY, maps, mem))
                 queue.add(new State(state.x + 1, state.y, state.currentCount + 1, state.x, state.y)); // 남
-            if (!checkCanNotAdd(state.x - 1, state.y, state.beforeX, state.beforeY, maps))
+            if (!checkCanNotAdd(state.x - 1, state.y, state.beforeX, state.beforeY, maps, mem))
                 queue.add(new State(state.x - 1, state.y, state.currentCount + 1, state.x, state.y)); // 북
         }
 
         return answer == 200 ? -1 : answer;
     }
 
-    private boolean checkCanNotAdd(int moveX, int moveY, int beforeX, int beforeY, int[][] maps) {
+    private boolean checkCanNotAdd(int moveX, int moveY, int beforeX, int beforeY, int[][] maps, boolean[][] mem) {
         if (
                 moveX >= height
                 || moveY >= width
@@ -75,9 +84,11 @@ public class GameMapShortPath {
             return true;
         }
 
+        boolean alreadyChecked = mem[moveX][moveY];
+
         boolean isBlockWay = maps[moveX][moveY] == 0;
 
-        return isBlockWay || isBackDirection(moveX, moveY, beforeX, beforeY);
+        return isBlockWay || isBackDirection(moveX, moveY, beforeX, beforeY) || alreadyChecked;
     }
 
     private boolean isBackDirection(int moveX, int moveY, int beforeX, int beforeY) {
