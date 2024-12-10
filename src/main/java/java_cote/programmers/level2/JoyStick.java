@@ -9,6 +9,7 @@ public class JoyStick {
         boolean normalDirection = true;
         Map<String, Integer> alphaPoint = initAlphaPoint();
         String[] alphaArray = name.split("");
+        int move = alphaArray.length - 2;
         if (isAllA(alphaArray)) {
             return answer;
         }
@@ -22,24 +23,24 @@ public class JoyStick {
         if (normalDirection) {
             for (int i = 1; i < alphaArray.length; i++) {
                 if (i == alphaArray.length - 1 && "A".equals(alphaArray[i])) {
+                    move = alphaArray.length - 3;
                     break;
                 }
 
-                answer++;
                 answer += alphaPoint.get(alphaArray[i]);
             }
         } else {
             for (int i = alphaArray.length - 1; i > 0; i--) {
                 if (i == 1 && "A".equals(alphaArray[i])) {
+                    move = alphaArray.length - 3;
                     break;
                 }
 
-                answer++;
                 answer += alphaPoint.get(alphaArray[i]);
             }
         }
 
-        return answer;
+        return answer + move;
     }
 
     private Map<String, Integer> initAlphaPoint() {
@@ -88,11 +89,12 @@ public class JoyStick {
 
     public static void main(String[] args) {
         JoyStick joyStick = new JoyStick();
-//        String name = "JEROEN";
+        String name = "JEROEN";
 //        String name = "JAN";
 //        String name = "BCAAS"; // 1 + 1, 2 + 1, 0 + 1, 0 + 1, 8  -> 15
 //        String name = "AAA"; // 0
-        String name = "AQA"; // 11
+//        String name = "AQA"; // 11
+//        String name = "BBBBAAAABA"; // 12
         int solution = joyStick.solution(name);
         System.out.println(solution);
     }
