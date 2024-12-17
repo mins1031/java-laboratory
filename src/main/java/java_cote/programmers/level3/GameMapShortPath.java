@@ -52,10 +52,14 @@ public class GameMapShortPath {
             State state = queue.poll();
             if (state.x == height - 1 && state.y == width - 1) {
                 answer = Math.min(state.currentCount, answer);
-                break;
+                continue;
             }
 
             if (state.currentCount > answer) {
+                continue;
+            }
+
+            if (mem[state.x][state.y]) {
                 continue;
             }
 
