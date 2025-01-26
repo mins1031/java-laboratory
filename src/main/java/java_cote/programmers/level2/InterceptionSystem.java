@@ -4,7 +4,6 @@ public class InterceptionSystem {
     public int solution(int[][] targets) {
         int answer = 0;
         int[] points = new int[100000000];
-        
 
         return answer;
     }
