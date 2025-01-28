@@ -41,18 +41,18 @@ public class NightWorkStatic {
 
             //작업수당 한번씩 -1 처리해야함 for i in works.length
             int[] peekWorks = peek.works;
-            for (int i = 0; i < peekWorks.length; i++) {
-                int minusTargetWork = peekWorks[i] - 1;
-                int[] nextWorks = new int[peekWorks.length];
-
-                new Node(
-
-                )
-            }
-            for (int work : peek.works) {
-
-                new
-            }
+//            for (int i = 0; i < peekWorks.length; i++) {
+//                int minusTargetWork = peekWorks[i] - 1;
+//                int[] nextWorks = new int[peekWorks.length];
+//
+//                new Node(
+//
+//                )
+//            }
+//            for (int work : peek.works) {
+//
+//                new
+//            }
 
         }
 
