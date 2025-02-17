@@ -136,6 +136,7 @@ public class DiskController {
 
         return jobsMap;
     }
+
     private Comparator<DiskJob> setJobSortConditions() {
         return (o1, o2) -> {
             if (o1.processTime > o2.processTime) {
