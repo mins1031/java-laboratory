@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class GemShopping {
     public int[] solution(String[] gems) {
-        int[] answer = {};
         int minStartIndex = 0;
         int minEndIndex = Integer.MAX_VALUE;
         int gemCount = Arrays.stream(gems).collect(Collectors.toSet()).size();
@@ -15,6 +14,12 @@ public class GemShopping {
         int presentStart = 0;
         int presentEnd = 1;
         while (presentEnd < gems.length) {
+            if (gemCount == 1) {
+                minStartIndex = 0;
+                minEndIndex = 0;
+                break;
+            }
+
             Set<String> countFilter = new HashSet<>();
             for (int i = presentStart; i <= presentEnd; i++) {
                 countFilter.add(gems[i]);
@@ -72,11 +77,10 @@ public class GemShopping {
     // 2-2-1-1-2-1. start를 늘리고 루프 진행
 
     public static void main(String[] args) {
-//        String[] gems = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
-//        String[] gems = {"AA", "AB", "AC", "AA", "AC"};
-        String[] gems = {"XYZ", "XYZ", "XYZ"};
-//        String[] gems = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
-//        String[] gems = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
+//        String[] gems = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"}; // 3, 7
+//        String[] gems = {"AA", "AB", "AC", "AA", "AC"}; // 1, 3
+//        String[] gems = {"XYZ", "XYZ", "XYZ"}; // 1, 1
+        String[] gems = {"ZZZ", "YYY", "NNNN", "YYY", "BBB"}; // 1, 5
 
         GemShopping gemShopping = new GemShopping();
         int[] solution = gemShopping.solution(gems);
