@@ -1,13 +1,11 @@
 package java_cote.programmers.level3;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
+import java.util.Objects;
 import java.util.Stack;
 
 public class TravelPath {
@@ -39,10 +37,10 @@ public class TravelPath {
     // 한번 사용한 티켓은 사용불가하기에 사용한 티켓 모아놓는 목록도 필요 -> 하나씩 번호부여하고 배열인덱스로 체크
     // 이 다음엔 뭐.. 노드 보고 처리만하면됨
     public String[] solution(String[][] tickets) {
-        String[] answer = {};
-        boolean[] mem = new boolean[tickets.length];
+        List<String> answer = new ArrayList<>();
+        boolean[] mem = new boolean[tickets.length+1];
         Map<String, List<Path>> pathMap = new HashMap<>();
-        int numCount = 1;
+        int numCount = 0;
         for (String[] ticket : tickets) {
             List<Path> orDefault = pathMap.getOrDefault(ticket[0], new ArrayList<>());
             orDefault.add(new Path(numCount, ticket[0], ticket[1]));
@@ -56,24 +54,46 @@ public class TravelPath {
 
         Stack<Path> stack = new Stack<>();
         stack.add(icn);
+        answer.add("ICN");
 
         while (!stack.isEmpty()) {
             Path pop = stack.pop();
             if (mem[pop.pathNum]) {
                 continue;
             }
+            mem[pop.pathNum] = true;
 
-            List<Path> paths = pathMap.get(pop.department);
-            for (Path path : paths) {
-
+            Path newAddPath = null;
+            List<Path> paths = pathMap.get(pop.getDestination());
+            if (Objects.isNull(paths)) {
+                answer.add(pop.getDestination());
+                break;
             }
+
+            for (Path path : paths) {
+                if (mem[path.getPathNum()]) {
+                    continue;
+                }
+
+                newAddPath = path;
+                break;
+            }
+
+            if (Objects.isNull(newAddPath)) {
+                answer.add(pop.getDestination());
+                break;
+            }
+
+            answer.add(pop.getDestination());
+            stack.add(newAddPath);
         }
 
-        return answer;
+        return answer.toArray(new String[0]);
     }
 
     public static void main(String[] args) {
         String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL","SFO"}};
+//        String[][] tickets = {{"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"}};
         TravelPath travelPath = new TravelPath();
         String[] solution = travelPath.solution(tickets);
         for (String s : solution) {
