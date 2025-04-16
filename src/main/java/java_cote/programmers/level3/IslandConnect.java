@@ -48,8 +48,6 @@ public class IslandConnect {
                 parentEachNode[connectInfo.start] = connectInfo.end;
             }
 
-
-
             connectIslands.add(connectInfo.start);
             connectIslands.add(connectInfo.end);
             answer += connectInfo.cost;
